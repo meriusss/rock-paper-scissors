@@ -18,30 +18,14 @@ function getPlayerChoice(){
 }
 
 function playRound(getComputerChoice, getPlayerChoice){
-    if (getComputerChoice === 0 && getPlayerChoice === "rock"){
+    if ((getComputerChoice === 0 && getPlayerChoice === "rock") || (getComputerChoice === 1 && getPlayerChoice === "paper") || (getComputerChoice === 2 && getPlayerChoice === "scissors")){
         console.log("Draw!");}
-    else if (getComputerChoice === 1 && getPlayerChoice === "rock"){
+    else if ((getComputerChoice === 1 && getPlayerChoice === "rock") || (getComputerChoice === 2 && getPlayerChoice === "paper") || (getComputerChoice === 0 && getPlayerChoice === "scissors")){
         console.log("Computer wins round! :(");
         computerWins++;}
-    else if (getComputerChoice === 2 && getPlayerChoice === "rock"){
+    else if ((getComputerChoice === 2 && getPlayerChoice === "rock") || (getComputerChoice === 0 && getPlayerChoice === "paper") || (getComputerChoice === 1 && getPlayerChoice === "scissors")){
         console.log("Player wins Round! :)");
         playerWins++;}
-    else if (getComputerChoice === 0 && getPlayerChoice === "paper"){
-        console.log("Player wins round! :)");
-        playerWins++;}
-    else if (getComputerChoice === 1 && getPlayerChoice === "paper"){
-        console.log("Draw!");}
-    else if (getComputerChoice === 2 && getPlayerChoice === "paper"){
-        console.log("Computer wins round! :(");
-        computerWins++;}
-    else if (getComputerChoice === 0 && getPlayerChoice === "scissors"){
-        console.log("Computer wins round! :(");
-        computerWins++;}
-    else if (getComputerChoice === 1 && getPlayerChoice === "scissors"){
-        console.log("Player wins round! :)");
-        playerWins++;}
-    else if (getComputerChoice === 2 && getPlayerChoice === "scissors"){
-        console.log("Draw!");}
 }
 
 function game(playRound){
@@ -50,12 +34,11 @@ function game(playRound){
     }
     if (computerWins > playerWins){
         console.log("Computer wins with a score of ", computerWins, " - ", playerWins);
+        document.getElementById('castig').innerHTML = ("Computer wins with a score of "+ computerWins + " - " + playerWins);
     }
     else if (computerWins < playerWins){
         console.log("Player wins with a score of ", playerWins, " - ", computerWins);
-    }
-    else if (computerWins = playerWins){
-        console.log("It's a draw!");
+        document.getElementById('castig').innerHTML = ("Player wins with a score of "+ playerWins + " - " + computerWins);
     }
 }
 
