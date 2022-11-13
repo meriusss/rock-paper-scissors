@@ -1,45 +1,70 @@
 let computerWins = 0;
 let playerWins = 0;
 let choices = ["rock", "paper", "scissors"];
+const playerWinsDisplay = document.getElementById("pScore")
+const computerWinsDisplay = document.getElementById("cScore")
+const playerSelectionDisplay = document.getElementById("userChoice");
+const computerSelectionDisplay = document.getElementById("computerChoice")
+const resultDisplay = document.getElementById("result")
+const btns = document.getElementsByClassName('btn');
+let playerSelection;
+let computerSelection;
+playerWinsDisplay.innerHTML = playerWins;
+computerWinsDisplay.innerHTML = computerWins;
+
+for (const btn of btns)
+btn.addEventListener('click', () => {
+    console.log(btn.id);
+    playerSelection = String(btn.id);
+    playerSelectionDisplay.innerHTML = playerSelection;
+    getComputerChoice();
+    playRound();
+    });
+
+
 
 function getComputerChoice(){
-    let computerSelection = Math.floor(Math.random()*choices.length);
-    //console.log(computerSelection);
-    return computerSelection;
-}
-
-function getPlayerChoice(){
-    let playerSelection = prompt("Please enter rock, paper or scissors!").toLowerCase();
-    while (choices.indexOf(playerSelection) <= -1){
-        playerSelection = prompt("Your choice is not on the list. Please enter rock, paper or scissors!").toLowerCase();
+    computerSelection = Math.floor(Math.random()*choices.length);
+    if (computerSelection === 0){
+        computerSelection = "rock";
     }
-    //console.log(playerSelection);
-    return playerSelection;
+    else if (computerSelection === 1){
+        computerSelection = "paper";
+    }
+    else if (computerSelection === 2){
+        computerSelection = "scissors";
+    }
+    computerSelectionDisplay.innerHTML = computerSelection;
+    console.log(computerSelection);
+
 }
 
-function playRound(getComputerChoice, getPlayerChoice){
-    if ((getComputerChoice === 0 && getPlayerChoice === "rock") || (getComputerChoice === 1 && getPlayerChoice === "paper") || (getComputerChoice === 2 && getPlayerChoice === "scissors")){
+function playRound(){
+    if ((computerSelection === playerSelection)){
         console.log("Draw!");}
-    else if ((getComputerChoice === 1 && getPlayerChoice === "rock") || (getComputerChoice === 2 && getPlayerChoice === "paper") || (getComputerChoice === 0 && getPlayerChoice === "scissors")){
+    else if ((computerSelection === "paper" && playerSelection === "rock") || (computerSelection === "scissors" && playerSelection === "paper") || (computerSelection === "rock" && playerSelection === "scissors")){
+        resultDisplay.innerHTML = "Computer wins round!";
         console.log("Computer wins round! :(");
-        computerWins++;}
-    else if ((getComputerChoice === 2 && getPlayerChoice === "rock") || (getComputerChoice === 0 && getPlayerChoice === "paper") || (getComputerChoice === 1 && getPlayerChoice === "scissors")){
+        computerWins++;
+        playerWinsDisplay.innerHTML = playerWins;
+        computerWinsDisplay.innerHTML = computerWins;}
+    else if ((computerSelection === "scissors" && playerSelection === "rock") || (computerSelection === "rock" && playerSelection === "paper") || (computerSelection === "paper" && playerSelection === "scissors")){
+        resultDisplay.innerHTML = "Player wins round!";
         console.log("Player wins Round! :)");
-        playerWins++;}
+        playerWins++;
+        playerWinsDisplay.innerHTML = playerWins;
+        computerWinsDisplay.innerHTML = computerWins;}
+
+    if (playerWins === 3){
+        resultDisplay.innerHTML = "Player won game!";
+        playerWins = 0;
+        computerWins = 0;
+    }
+    else if (computerWins === 3){
+        resultDisplay.innerHTML = "Computer won game!";
+        playerWins = 0;
+        computerWins = 0;
+    }
 }
 
-function game(playRound){
-    while (playerWins < 3 && computerWins < 3 ){
-        playRound(getComputerChoice(),getPlayerChoice());
-    }
-    if (computerWins > playerWins){
-        console.log("Computer wins with a score of ", computerWins, " - ", playerWins);
-        document.getElementById('castig').innerHTML = ("Computer wins with a score of "+ computerWins + " - " + playerWins);
-    }
-    else if (computerWins < playerWins){
-        console.log("Player wins with a score of ", playerWins, " - ", computerWins);
-        document.getElementById('castig').innerHTML = ("Player wins with a score of "+ playerWins + " - " + computerWins);
-    }
-}
 
-game(playRound);
