@@ -59,11 +59,15 @@ function playRound(){
         resultDisplay.innerHTML = "Player won game!";
         playerWins = 0;
         computerWins = 0;
+        playerWinsDisplay.innerHTML = playerWins;
+        computerWinsDisplay.innerHTML = computerWins;
     }
     else if (computerWins === 3){
         resultDisplay.innerHTML = "Computer won game!";
-        playerWins = 0;
         computerWins = 0;
+        playerWins = 0;
+        playerWinsDisplay.innerHTML = playerWins;
+        computerWinsDisplay.innerHTML = computerWins;
     }
 }
 
